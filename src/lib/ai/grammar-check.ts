@@ -8,6 +8,7 @@ interface GrammarCheckOptions {
   model: string;
   apiKey: string;
   language: string;
+  baseUrl?: string;
 }
 
 interface AIGrammarResponse {
@@ -26,7 +27,7 @@ export async function checkGrammar(
   text: string,
   options: GrammarCheckOptions
 ): Promise<GrammarCheckResult> {
-  const { provider, model: modelId, apiKey, language } = options;
+  const { provider, model: modelId, apiKey, language, baseUrl } = options;
 
   if (!text.trim()) {
     return {
@@ -38,7 +39,7 @@ export async function checkGrammar(
   }
 
   try {
-    const model = getModel(provider, modelId, apiKey);
+    const model = getModel(provider, modelId, apiKey, baseUrl);
 
     const { text: responseText } = await generateText({
       model,
@@ -95,14 +96,14 @@ export async function rewriteText(
   style: 'formal' | 'casual' | 'concise' | 'elaborate',
   options: Omit<GrammarCheckOptions, 'language'>
 ): Promise<string> {
-  const { provider, model: modelId, apiKey } = options;
+  const { provider, model: modelId, apiKey, baseUrl } = options;
 
   if (!text.trim()) {
     return text;
   }
 
   try {
-    const model = getModel(provider, modelId, apiKey);
+    const model = getModel(provider, modelId, apiKey, baseUrl);
 
     const { text: rewrittenText } = await generateText({
       model,

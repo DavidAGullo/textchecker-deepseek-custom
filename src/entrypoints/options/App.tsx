@@ -152,6 +152,8 @@ function APIKeysTab({
     { id: 'google', name: 'Google AI (Gemini)', url: 'https://aistudio.google.com/apikey' },
     { id: 'openai', name: 'OpenAI', url: 'https://platform.openai.com/api-keys' },
     { id: 'anthropic', name: 'Anthropic (Claude)', url: 'https://console.anthropic.com/settings/keys' },
+    { id: 'deepseek', name: 'DeepSeek', url: 'https://deepseek.com/api_keys' },
+    { id: 'custom', name: 'Custom Provider (OpenAI Compatible)', url: '#' },
   ];
 
   return (
@@ -216,7 +218,7 @@ function SettingsTab({
   saveSettings: (settings: Settings) => void;
   apiKeys: APIKeys;
 }) {
-  const providers: AIProvider[] = ['google', 'openai', 'anthropic'];
+  const providers: AIProvider[] = ['google', 'openai', 'anthropic', 'deepseek', 'custom'];
   const availableProviders = providers.filter((p) => apiKeys[p]);
 
   return (

@@ -59,6 +59,7 @@ export default defineBackground(() => {
              model: modelId || settings.model,
              apiKey,
              language: settings.language,
+             baseUrl: settings.customBaseUrl,
            });
 
           // Filter out words in personal dictionary
@@ -108,6 +109,7 @@ export default defineBackground(() => {
              provider: settings.provider,
              model: modelId || settings.model,
              apiKey,
+             baseUrl: settings.customBaseUrl,
            });
 
           sendResponse({ success: true, result: rewritten });
@@ -124,6 +126,8 @@ export default defineBackground(() => {
               google: !!apiKeys.google,
               openai: !!apiKeys.openai,
               anthropic: !!apiKeys.anthropic,
+              deepseek: !!apiKeys.deepseek,
+              custom: !!apiKeys.custom,
             },
           });
           break;

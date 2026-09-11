@@ -10,6 +10,8 @@ export default function App() {
     google: false,
     openai: false,
     anthropic: false,
+    deepseek: false,
+    custom: false,
   });
   const [stats, setStats] = useState({ checksPerformed: 0, errorsFound: 0, correctionsApplied: 0 });
   const [loading, setLoading] = useState(true);
@@ -50,7 +52,7 @@ export default function App() {
     browser.runtime.openOptionsPage();
   }
 
-  const hasAnyApiKey = hasApiKey.google || hasApiKey.openai || hasApiKey.anthropic;
+  const hasAnyApiKey = hasApiKey.google || hasApiKey.openai || hasApiKey.anthropic || hasApiKey.deepseek || hasApiKey.custom;
   const providerName = settings.provider.charAt(0).toUpperCase() + settings.provider.slice(1);
 
   if (loading) {

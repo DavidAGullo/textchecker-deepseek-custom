@@ -1,4 +1,4 @@
-export type AIProvider = 'google' | 'openai' | 'anthropic';
+export type AIProvider = 'google' | 'openai' | 'anthropic' | 'deepseek' | 'custom';
 
 export type CheckMode = 'realtime' | 'ondemand';
 
@@ -8,12 +8,15 @@ export interface APIKeys {
   google?: string;
   openai?: string;
   anthropic?: string;
+  deepseek?: string;
+  custom?: string;
 }
 
 export interface Settings {
   provider: AIProvider;
   model: string;
   customModel?: string;
+  customBaseUrl?: string;  // NEW — endpoint for 'custom' provider
   checkMode: CheckMode;
   language: string;
   enabled: boolean;
@@ -78,6 +81,13 @@ export const AVAILABLE_MODELS: Record<AIProvider, { id: string; name: string }[]
     { id: 'claude-3-5-sonnet-latest', name: 'Claude 3.5 Sonnet' },
     { id: 'claude-opus-4-20250514', name: 'Claude Opus 4' },
   ],
+  deepseek: [
+    { id: 'deepseek-chat', name: 'DeepSeek Chat (Deprecated)' },
+    { id: 'deepseek-reasoner', name: 'DeepSeek Reasoner (Deprecated)' },
+    { id: 'deepseek-flash', name: 'DeepSeek Flash (Recommended)' },
+    { id: 'deepseek-v4-pro', name: 'DeepSeek v4 Pro' },
+  ],
+  custom: [], // Custom provider models must be defined by the user in order to use it.
 };
 
 export const SUPPORTED_LANGUAGES = [
